@@ -53,7 +53,7 @@ const studentSignUp = async (req, res) => {
             await sendMail({
                 subject: `Kindly Verify your mail`,
                 email: user.email,
-                html: signUpTemplate(verifyLink, user.fullName),
+                html: signUpTemplate(verifyLink, user.firstName),
             });
             res.status(201).json({
                 message: `Welcome ${user.firstName} kindly check your gmail to access the link to verify your email`,
@@ -73,7 +73,7 @@ const verifyEmail = async (req, res) => {
         // Extract the token from the request params
         const { token } = req.params;
         // Extract the email from the verified token
-        const { email } = jwt.verify(token, process.env.jwt_secret);
+        const { email } = jwt.verify(token, process.env.JWT_SECRET);
         // Find the user with the email
         const user = await studentModel.findOne({ email });
         // Check if the user is still in the database
@@ -132,7 +132,7 @@ const loginUser = async (req, res) => {
                 userId: existingUser._id,
                 email: existingUser.email,
             },
-            process.env.jwt_secret,
+            process.env.JWT_SECRET
             { expiresIn: "1h" }
         );
 
@@ -167,7 +167,7 @@ const resendVerificationEmail = async (req, res) => {
             });
         }
 
-        const token = jwt.sign({ email: user.email }, process.env.jwt_secret, {
+        const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, {
             expiresIn: "20mins"
         });
         const verifyLink = `${req.protocol}://${req.get(
@@ -176,7 +176,7 @@ const resendVerificationEmail = async (req, res) => {
         let mailOptions = {
             email: user.email,
             subject: "Verification email",
-            html: verifyTemplate(verifyLink, user.fullName),
+            html: verifyTemplate(verifyLink, user.firstName),
         };
         // Send the the email
         await sendMail(mailOptions);
@@ -205,7 +205,7 @@ const forgotPassword = async (req, res) => {
         }
 
         // Generate a reset token
-        const resetToken = jwt.sign({ email: user.email }, process.env.jwt_secret, {
+        const resetToken = jwt.sign({ email: user.email }, process.env.JWT_SECRET, {
             expiresIn: "30m",
         });
         const resetLink = `${req.protocol}://${req.get(
@@ -237,7 +237,7 @@ const resetPassword = async (req, res) => {
         const { password } = req.body;
 
         // Verify the user's token and extract the user's email from the token
-        const { email } = jwt.verify(token, process.env.jwt_secret);
+        const { email } = jwt.verify(token, process.env.JWT_SECRET);
 
         // Find the user by ID
         const user = await studentModel.findOne({ email });
@@ -272,7 +272,7 @@ const changePassword = async (req, res) => {
         const { password, existingPassword } = req.body;
 
         // Verify the user's token and extract the user's email from the token
-        const { email } = jwt.verify(token, process.env.jwt_secret);
+        const { email } = jwt.verify(token, process.env.JWT_SECRET);
 
         // Find the user by ID
         const user = await studentModel.findOne({ email });

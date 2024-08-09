@@ -52,7 +52,7 @@ const signUp = async (req, res) => {
             await sendMail({
                 subject: `Kindly Verify your mail`,
                 email: user.email,
-                html: signUpTemplate(verifyLink, user.fullName),
+                html: signUpTemplate(verifyLink, user.firstName),
             });
             res.status(201).json({
                 message: `Welcome ${user.firstName} kindly check your gmail to access the link to verify your email`,
@@ -174,7 +174,7 @@ const resendVerificationEmail = async (req, res) => {
         let mailOptions = {
             email: user.email,
             subject: "Verification email",
-            html: verifyTemplate(verifyLink, user.fullName),
+            html: verifyTemplate(verifyLink, user.firstName),
         };
         // Send the the email
         await sendMail(mailOptions);
