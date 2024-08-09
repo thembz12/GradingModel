@@ -5,7 +5,7 @@ const signUpTemplate = (verifyLink, fullName) => {
       <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Welcome to Midas To-Do App!</title>
+        <title>Welcome to Our Grading App!</title>
         <style>
           body {
             font-family: Arial, sans-serif;
@@ -56,10 +56,10 @@ const signUpTemplate = (verifyLink, fullName) => {
       <body>
         <div class="container">
           <div class="header">
-            <h1>Welcome to Midas To-Do App!</h1>
+            <h1>Welcome to Midas Grading App!</h1>
           </div>
           <div class="content">
-            <p>Hello ${fullName},</p>
+            <p>Hello ${firstName},</p>
             <p>Thank you for joining our community! We're thrilled to have you on board.</p>
             <p>Please click the button below to verify your account:</p>
             <p>
@@ -78,13 +78,13 @@ const signUpTemplate = (verifyLink, fullName) => {
   };
   
   
-  const verifyTemplate = (verifyLink, fullName) => {
+  const verifyTemplate = (verifyLink, firstName) => {
       return `
       <!DOCTYPE html>
   <html>
   <head>
       <meta charset="UTF-8">
-      <title>Welcome to Midas To-Do App</title>
+      <title>Welcome to Midas Grading App</title>
       <style>
       body {
         font-family: Arial, sans-serif;
@@ -138,7 +138,7 @@ const signUpTemplate = (verifyLink, fullName) => {
           <h1>Verify Your Account</h1>
         </div>
         <div class="content">
-          <p>Hello ${fullName},</p>
+          <p>Hello ${firstName},</p>
           <p>We're excited to have you on board! Please click the button below to verify your account:</p>
           <p>
             <a href="${verifyLink}" class="button">Verify My Account</a>
@@ -154,7 +154,7 @@ const signUpTemplate = (verifyLink, fullName) => {
     </html>
   `;
 };
-  const forgotPasswordTemplate = (resetLink, fullName) => {
+  const forgotPasswordTemplate = (resetLink, firstName) => {
     return `
       <!DOCTYPE html>
       <html lang="en">
@@ -215,7 +215,7 @@ const signUpTemplate = (verifyLink, fullName) => {
             <h1>Reset Your Password</h1>
           </div>
           <div class="content">
-            <p>Hello ${fullName},</p>
+            <p>Hello ${firstName},</p>
             <p>We received a request to reset your password. If you didn't make this request, please ignore this email.</p>
             <p>Click the button below to reset your password:</p>
             <p>
