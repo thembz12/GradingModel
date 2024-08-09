@@ -6,10 +6,11 @@ require("./config/dbConfig")
 const port = process.env.port || 4321
 const app = express()
 
-
+const cors = require(`cors`)
 
 
 app.use(express.json())
+app.use(cors("*"))
 app.use("/api/v1/", router)
 app.use("/api/v1/", studentrouter)
 
